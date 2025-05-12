@@ -5,13 +5,6 @@ from utils.network import get_httpx_client
 from .models import CreateUser, UpdateUser, User
 
 
-def build_url(path: str):
-    base_url = get_settings().connection.backend_url.unicode_string()
-    if path[0] == "/":
-        path = path[1:]
-    return f"{base_url}{path}"
-
-
 def create_user(user: CreateUser):
     with get_httpx_client() as client:
         resp = client.post(

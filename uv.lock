@@ -1,5 +1,4 @@
 version = 1
-revision = 1
 requires-python = ">=3.13"
 
 [[package]]
@@ -476,6 +475,7 @@ dependencies = [
     { name = "pydantic-settings", extra = ["yaml"] },
     { name = "pydub" },
     { name = "streamlit" },
+    { name = "streamlit-elements" },
     { name = "streamlit-webrtc" },
     { name = "structlog" },
     { name = "websockets" },
@@ -491,6 +491,7 @@ requires-dist = [
     { name = "pydantic-settings", extras = ["yaml"], specifier = ">=2.9.1" },
     { name = "pydub", specifier = ">=0.25.1" },
     { name = "streamlit", specifier = ">=1.45.0" },
+    { name = "streamlit-elements", specifier = "==0.1.*" },
     { name = "streamlit-webrtc", specifier = ">=0.62.4" },
     { name = "structlog", specifier = ">=25.3.0" },
     { name = "websockets", specifier = ">=15.0.1" },
@@ -1156,6 +1157,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c0/52/83d46b4c5044477e9c6dee779704a9d4041610439533af9c0a5084921098/streamlit-1.45.0.tar.gz", hash = "sha256:4e99014e113a11a7163b9da5ac079efb1ae5f8575a09c5a6a9c43cd6877a2a88", size = 9462166 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/43/ff/f41cfaf1bb58223fe77ff87213a689f6c9c82f7363f9d7c879d294dbe985/streamlit-1.45.0-py3-none-any.whl", hash = "sha256:b7d03ec68a23de0f1922ec9a28fbe3fe37d9fb31ad31d6c429d262c3631c2943", size = 9856265 },
+]
+
+[[package]]
+name = "streamlit-elements"
+version = "0.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "streamlit" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/8d/53/6ecfba409b61cdf246d4138bd9c1bef4b79a03fbeeee513ab0c7d43f18cb/streamlit-elements-0.1.0.tar.gz", hash = "sha256:5f9f116f22df3ce4a8636b1dee7c2fd3dc3cb0c66267fd28c3e0314aa1d303a7", size = 6649428 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1f/0d/eecce69faeb4aec152f4036afe8a0f4f67b0af4fe0ff709243591ad2533d/streamlit_elements-0.1.0-py3-none-any.whl", hash = "sha256:593c4b88c399c55879aa76f7f42970f30106f66acaa4baada6338ae5571790df", size = 7833353 },
 ]
 
 [[package]]

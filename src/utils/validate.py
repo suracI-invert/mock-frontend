@@ -1,8 +1,21 @@
 from __future__ import annotations
 
+from datetime import datetime
 import hashlib
 import re
 import unicodedata
+
+
+def validate_datetime_format(value: str | datetime) -> datetime:
+    if isinstance(value, datetime):
+        return value
+    elif isinstance(value, str):
+        try:
+            return datetime.fromisoformat(value)
+        except Exception:
+            raise ValueError("Invalid datetime format. Expected isoformat.")
+    else:
+        raise ValueError("Invalid type. Expected str or datetime.")
 
 
 def make_hashes(password: str) -> str:

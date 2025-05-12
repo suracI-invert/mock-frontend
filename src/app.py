@@ -5,6 +5,9 @@ from components.user import get_user_info, UserInfo
 from utils.network import get_httpx_client
 
 from settings import get_settings
+import logfire
+
+logfire.configure()
 
 
 def login():

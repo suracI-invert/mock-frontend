@@ -13,6 +13,7 @@ dependencies = [
     "pydantic-settings[yaml]>=2.9.1",
     "pydub>=0.25.1",
     "streamlit>=1.45.0",
+    "streamlit-elements==0.1.*",
     "streamlit-webrtc>=0.62.4",
     "structlog>=25.3.0",
     "websockets>=15.0.1",
