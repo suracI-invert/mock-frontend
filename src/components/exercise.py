@@ -155,12 +155,15 @@ def display_speaking():
         st.switch_page("pages/lesson.py")
 
 
+# def
+
+
 def exercise_speaking(lesson: Lesson):
     user_info = get_user_info()
     if "speaking_session" not in st.session_state:
         st.session_state.speaking_session = {
             "session_id": uuid.uuid4().hex,
-            "part": "p1",
+            "part": "p2",
             "end": False,
         }
     if st.session_state.speaking_session["end"]:
@@ -169,70 +172,6 @@ def exercise_speaking(lesson: Lesson):
     else:
         session_id = st.session_state.speaking_session["session_id"]
         part = st.session_state.speaking_session["part"]
-        audio_input = st.audio_input("Audio Input")
-        if audio_input:
-            with st.chat_message(
-                user_info.name if user_info else "User",
-                avatar=user_info.avatarUrl if user_info else None,
-            ):
-                st.audio(audio_input)
-                with get_httpx_client() as client:
-                    resp = client.post(
-                        f"{get_settings().connection.backend_url.unicode_string()}resources/v1/audio/text",
-                        content=audio_input.getvalue(),
-                    )
-                    if resp.status_code == 200:
-                        transcript = resp.json()["transcript"]
-                        st.write(transcript)
-                        chat_resp = client.post(
-                            f"{get_settings().connection.backend_url.unicode_string()}exercise/v1/speaking",
-                            json={
-                                "session_id": session_id,
-                                "part": part,
-                                "content": transcript,
-                                "topic": lesson.content.get("topic", ""),
-                                "main_question": lesson.content.get(
-                                    "main_question", ""
-                                ),
-                                "guidelines": lesson.content.get("guidelines", []),
-                                "level": lesson.level.value,
-                            },
-                        )
-                        if chat_resp.status_code == 200:
-                            st.session_state.speaking_session["data"] = chat_resp.json()
-                    else:
-                        st.error("Failed to transcript ")
-
-        _data = st.session_state.speaking_session.get("data", {})
-        assert isinstance(_data, dict)
-        current_resp = _data.get("response", "")
-        with get_httpx_client() as client:
-            resp = client.post(
-                f"{get_settings().connection.backend_url.unicode_string()}resources/v1/audio/convert",
-                json={"transcript": current_resp},
-            )
-            if resp.status_code == 200:
-                with st.chat_message("assistant"):
-                    st.audio(resp.content)
-                    st.write(current_resp)
-        if "history" in _data:
-            _history: dict[str, list[dict[str, str]]] = _data.get("history", {})
-
-            for p, h in _history.items():
-                st.write(f"Part {p}")
-                st.write("---")
-                for i, q in enumerate(h):
-                    if q.get("role") == "user":
-                        with st.chat_message(
-                            user_info.name if user_info else "User",
-                            avatar=user_info.avatarUrl if user_info else None,
-                        ):
-                            st.write(f"{q['content']}")
-                    elif q.get("role") == "assistant":
-                        with st.chat_message("assistant"):
-                            st.write(f"{q['content']}")
-        if _data.get("is_end", False):
-            st.session_state.speaking_session["end"] = True
 
 
 def grade(

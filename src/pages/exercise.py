@@ -64,4 +64,6 @@ else:
                 case LessonType.LISTENING:
                     transcript, exercise_data = exercise_listening(lesson)
                 case LessonType.SPEAKING:
-                    exercise_speaking(lesson)
+                    # exercise_speaking(lesson)
+                    st.session_state.pop("exercise_lesson", None)
+                    st.switch_page("pages/error.py")
